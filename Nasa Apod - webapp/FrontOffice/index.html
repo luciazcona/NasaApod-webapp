@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Nasa APOD</title>
+    <link rel="shortcut icon" type="image/png" href="img/nasa_icon.png" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fontAwesome.css" />
+    <link rel="stylesheet" href="css/hero-slider.css" />
+    <link rel="stylesheet" href="css/templatemo-main.css" />
+    <link rel="stylesheet" href="css/owl-carousel.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"
+      rel="stylesheet"
+    />
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  </head>
+  <!--
+Vanilla Template
+https://templatemo.com/tm-526-vanilla
+-->
+  <body>
+    <div id="esRegistrado" data-value="false"></div>
+
+    <div class="fixed-side-navbar">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#home"><span>Intro</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#services"><span>Description</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#portfolio"><span>Search</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#our-story"><span>Register / Log In</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact-us"><span>Contact Us</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="parallax-content baner-content" id="home">
+      <div class="container">
+        <div class="first-content">
+          <h1>N A S A</h1>
+          <span id="APOD"><em>Astronomy Picture Of The Day</em></span>
+
+          <div class="primary-button">
+            <a href="#services">Discover More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //boton que abre la imagen del dia
+      function abrirVentanaAPOD() {
+        var xhr = new XMLHttpRequest();
+        var url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+              var respuesta = JSON.parse(xhr.response);
+              if (respuesta.error) {
+                  alert(respuesta.error);
+              } else {
+                // Abrir una nueva ventana con los detalles de la imagen
+                var urlDetalleImagen = 'detalle_imagen.html?titulo=' + encodeURIComponent(respuesta.title) + 
+                                        '&copyright=' + encodeURIComponent(respuesta.copyright) +
+                                        '&fecha=' + encodeURIComponent(respuesta.date) + 
+                                        '&explicacion=' + encodeURIComponent(respuesta.explanation) + 
+                                        '&url_imagen=' + encodeURIComponent(respuesta.url);
+                window.open(urlDetalleImagen, '_blank');
+              }
+            } else {
+                alert('Error al consultar la imagen.');
+            }
+          }
+        };
+        xhr.send();
+      }
+    </script>
+
+    <div class="service-content" id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="left-text">
+              <h4>What is APOD?</h4>
+              <div class="line-dec"></div>
+              <p>
+                One of the most popular websites at NASA is the Astronomy
+                Picture of the Day. In fact, this website is one of the most
+                popular websites across all federal agencies.
+              </p>
+              <ul>
+                <li>
+                  - Nasa's
+                  <a href="https://api.nasa.gov/#browseAPI" target="_blank"
+                    >Open APIs</a
+                  >
+                </li>
+                <li>
+                  - Official APOD
+                  <a
+                    href="https://apod.nasa.gov/apod/lib/aptree.html"
+                    target="_blank"
+                    >Main Page</a
+                  >
+                </li>
+                <li>
+                  - Official APOD
+                  <a
+                    href="https://apod.nasa.gov/apod/archivepix.html"
+                    target="_blank"
+                    >Archive</a
+                  >
+                </li>
+                <li>
+                  - APOD
+                  <a
+                    href="https://apod.nasa.gov/apod/ap_faq.html"
+                    target="_blank"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+              <div class="primary-button">
+                <a href="#" onclick="abrirVentanaAPOD(); return false;"
+                  >Picture of the day</a
+                >
+              </div>
+              <div class="primary-button">
+                <a href="#portfolio">Search for...</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="service-item">
+                  <h4>Who are we?</h4>
+                  <div class="line-dec"></div>
+                  <p>
+                    We are Lucía and Pablo, Group 24<br />Sistemas de
+                    Información Web<br />UPNA 2023/24
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="service-item">
+                  <h4>Why APOD?</h4>
+                  <div class="line-dec"></div>
+                  <p>
+                    It's an API that offers a wide selection of updated
+                    astronomical images, making it an ideal choice for our
+                    application.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="service-item">
+                  <h4>How did we make it?</h4>
+                  <div class="line-dec"></div>
+                  <p>
+                    We built it using PHP, HTML, and CSS, ensuring scalability
+                    and flexibility for future updates.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="service-item">
+                  <h4>Fast Support 24/7</h4>
+                  <div class="line-dec"></div>
+                  <p>
+                    Our team provides fast assistance 24 hours a day, 7 days a
+                    week, ensuring your peace of mind.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    Calendario para admitir fecha
+    -->
+    <div class="parallax-content projects-content" id="portfolio">
+      <div class="pipo">
+        <div class="calendarioPipo">
+          <div class="container">
+            <div class="first-content">
+              <h4>Search for an APOD image by calendar:</h4>
+            </div>
+          </div>
+          <div class="container">
+            <div class="contact-calendar">
+              <form id="contact" action="" method="POST">
+                <div class="col-md-12">
+                  <label for="fecha">Select a date:</label>
+                  <input type="date" id="fecha" />
+                  <button id="enviar">Enviar</button>
+                  <script src="js/consultar_fecha.js"></script>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>      
+
+        <!--
+        Input para admitir titulo
+        -->
+        <div class="inputTituloPipo">
+          <div class="container">
+            <div class="first-content">
+              <h4>Search for an APOD image by title:</h4>
+            </div>
+          </div>
+          <div class="container">
+            <div class="contact-calendar">
+              <form id="contact" action="" method="POST">
+                <div class="col-md-12">
+                  <label for="titulo">Input a title:</label>
+                  <input type="text" id="titulo" />
+                  <div id="seleccion">
+                    <select id="titulos"></select>
+                    <!-- Aquí se mostrarán los títulos de las imágenes -->
+                  </div>
+                  <button id="enviarTitulo">Search</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+      Selector de contribuidor
+      -->
+      <div class="container">
+        <div class="first-content">
+          <h4>Top Contributors:</h4>
+        </div>
+      </div>
+      <div class="container">
+        <div class="contact-calendar">
+          <form id="contact" action="" method="POST">
+            <div class="col-md-12">
+              <label for="contributor">Select a contributor:</label>
+              <div id="seleccion">
+                <select id="top_contributors"></select>
+                <?php include 'consultar_top_contributors.php'; ?>
+                <!-- Incluir el script PHP aquí -->
+              </div>
+              <button id="enviarContributors">Fetch images</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .pipo{
+        display: flex;
+      }
+      #titulos {
+        width: 300px;
+        height: 40px;
+        background-color: #60c3c8;
+        margin-bottom: 30px;
+      }
+    </style>
+
+    <div class="tabs-content" id="our-story">
+      <div class="container">
+        <div class="contact-form">
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              var signInRadio = document.getElementById("sign-in");
+              var signUpRadio = document.getElementById("sign-up");
+              var signInForm = document.querySelector(".sign-in-form");
+              var signUpForm = document.querySelector(".sign-up-form");
+
+              signInRadio.addEventListener("change", function () {
+                signInForm.style.display = "block";
+                signUpForm.style.display = "none";
+              });
+
+              signUpRadio.addEventListener("change", function () {
+                signInForm.style.display = "none";
+                signUpForm.style.display = "block";
+              });
+            });
+            // Función para enviar el formulario mediante AJAX
+            function registrarUsuario() {
+              var xhr = new XMLHttpRequest();
+              var url = "registro.php";
+              var formData = new FormData(
+                document.getElementById("formulario_registro")
+              );
+
+              xhr.open("POST", url, true);
+
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                      alert(response.message);
+                    } else {
+                      alert(response.message);
+                    }
+                  } else {
+                    alert("Error processing the request.");
+                  }
+                }
+              };
+              xhr.send(formData);
+            }
+
+            function loggearUsuario() {
+              var xhr = new XMLHttpRequest();
+              var url = "signin.php";
+              var formData = new FormData(
+                document.getElementById("formulario_signin")
+              );
+
+              xhr.open("POST", url, true);
+
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                      alert(response.message);
+                      window.location.href = "index2.html";
+                    } else {
+                      alert(response.message);
+                    }
+                  } else {
+                    alert("Login error.");
+                  }
+                }
+              };
+              xhr.send(formData);
+            }
+          </script>
+          <div>
+            <style>
+              div h2 {
+                text-align: center;
+                color: aliceblue;
+              }
+              div {
+                justify-content: center;
+              }
+              #formulario_registro input {
+                grid-row-end: auto;
+                align-items: flex-end;
+                justify-content: end;
+                align-items: flex-end;
+                display: block;
+              }
+              #formulario_registro label {
+                text-align: left;
+              }
+              #formulario_signin input {
+                grid-row-end: auto;
+                align-items: flex-end;
+                justify-content: end;
+                align-items: flex-end;
+                display: block;
+              }
+              #formulario_signin label {
+                text-align: left;
+              }
+            </style>
+            <div>
+              <h2 style="text-align: center; color: aliceblue">
+                <strong>Register / Log In</strong>
+              </h2>
+              <div style="justify-content: center">
+                <input id="sign-in" type="radio" name="tab" class="tab" />
+                <label for="sign-in" class="Sign">Register</label>
+                <br>
+                <input id="sign-up" type="radio" name="tab" class="tab" />
+                <label for="sign-up" class="Sign">Log In</label>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="contact-calendar sign-in-form">
+              <form
+                id="formulario_registro"
+                onsubmit="event.preventDefault(); registrarUsuario();"
+              >
+                <div class="col-md-12">
+                  <label for="nombre">Name: </label>
+                  <input type="text" name="nombre" /><br />
+                  <label for="email">Email: </label>
+                  <input type="email" name="email" /><br />
+                  <label for="contrasena">Password: </label>
+                  <input type="password" name="contrasena" />
+                  <br />
+                  <button id="registrar">Register</button>
+                </div>
+              </form>
+            </div>
+            <div class="contact-calendar sign-up-form" style="display: none">
+              <form
+                id="formulario_signin"
+                onsubmit="event.preventDefault(); loggearUsuario();"
+              >
+                <div class="col-md-12">
+                  <label for="email">Email: </label>
+                  <input type="email" name="email" /><br />
+                  <label for="contrasena">Password: </label>
+                  <input type="password" name="contrasena" />
+                  <br />
+                  <button id="signin">Log in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <div class="wrapper">
+              <section id="first-tab-group" class="tabgroup">
+                <div id="tab1">
+                  <img src="img/17Agosto2020.jpg" alt="" / width="800px"
+                  height="300px">
+                  <!-- <p>
+                    Please do not re-distribute our template ZIP file on your
+                    template collection sites. You can make a screenshot and a
+                    link back to our website. This template can be used for
+                    personal or commercial purposes by end-users.
+                  </p> -->
+                </div>
+                <div id="tab2">
+                  <img src="img/17Mayo2023.jpg" alt="" / width="800px"
+                  height="300px">
+                  <!-- <p>
+                    Aliquam eu ultrices risus, sed condimentum diam. Duis risus
+                    nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et
+                    vehicula est. Cras at vulputate justo. Cras eu nulla metus.
+                    Ut et pretium velit. Pellentesque at neque tristique dui
+                    tempor venenatis.
+                  </p> -->
+                </div>
+                <div id="tab3">
+                  <img src="img/21Agosto2022.jpg" alt="" / width="800px"
+                  height="300px">
+                  <!-- <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    lacinia ligula est, at venenatis ex iaculis quis. Morbi
+                    sollicitudin nulla eget odio pellentesque, sed cursus diam
+                    iaculis.
+                  </p> -->
+                </div>
+                <div id="tab4">
+                  <img src="img/29Junio2007.jpeg" alt="" / width="800px"
+                  height="300px">
+                  <!-- <p>
+                    Duis risus nulla, elementum vitae nisi a, ornare maximus
+                    nisl. Morbi et vehicula est. Cras at vulputate justo. Cras
+                    eu nulla metus. Ut et pretium velit. Pellentesque at neque
+                    tristique.
+                  </p> -->
+                </div>
+              </section>
+              <ul class="tabs clearfix" data-tabgroup="first-tab-group">
+                <li><a href="#tab1" class="active">2008</a></li>
+                <li><a href="#tab2">2014</a></li>
+                <li><a href="#tab3">2016</a></li>
+                <li><a href="#tab4">2019</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="parallax-content contact-content" id="contact-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="img/NASA_logo.svg.png" />
+          </div>
+          <div class="col-md-6">
+            <div class="map">
+              <!-- How to change your own map point
+                           1. Go to Google Maps
+                           2. Click on your location point
+                           3. Click "Share" and choose "Embed map" tab
+                           4. Copy only URL and paste it within the src="" field below
+                    -->
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1105.5499430226785!2d-80.60836935620213!3d28.39203084594106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e0a71c7e2b11d7%3A0x8ac28f9fef964a62!2sSPACE!5e0!3m2!1ses!2ses!4v1709031075275!5m2!1ses!2ses"
+                width="100%"
+                height="390"
+                frameborder="0"
+                style="border: 0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="primary-button">
+              <a href="#home">Back To Top</a>
+            </div>
+            <!-- <ul>
+              <li>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-google"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+              </li>
+            </ul> -->
+            <div id="lastUpdate">Loading last DB update...</div>
+            <style>#lastUpdate{color:white}</style>
+            <p>
+              Copyright &copy; 2024 Grupo 24 - Design: <em>Lucía y Pablo</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="js/vendor/jquery-1.11.2.min.js"><\/script>'
+        );
+    </script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $(".fixed-side-navbar a, .primary-button a").on(
+          "click",
+          function (event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+              // Prevent default anchor click behavior
+              event.preventDefault();
+
+              // Store hash
+              var hash = this.hash;
+
+              // Using jQuery's animate() method to add smooth page scroll
+              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+              $("html, body").animate(
+                {
+                  scrollTop: $(hash).offset().top,
+                },
+                800,
+                function () {
+                  // Add hash (#) to URL when done scrolling (default click behavior)
+                  window.location.hash = hash;
+                }
+              );
+            } // End if
+          }
+        );
+      });
+    </script>
+    <script src="js/last_db_update.js"></script>
+    <script src="js/consultar_titulo.js"></script>
+    <script src="js/consultar_top_contributors.js"></script>
+  </body>
+</html>

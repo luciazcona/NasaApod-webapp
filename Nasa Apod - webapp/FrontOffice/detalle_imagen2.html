@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Details</title>
+    <link rel="shortcut icon" type="image/png" href="img/nasa_icon.png" />
+</head>
+<body>
+    <h2 id="titulo_imagen"></h2>
+    <h4 id="copyright"></h4>
+    <h4 id="fecha"></h4>
+
+    <div id="contenedor_imagen" style="text-align: center;">
+        <img id="imagen" src="" alt="Imagen" style="max-height: 500px;">
+        <p id="youtube_link" style="display: none;"></p>
+    </div>
+
+    <p id="explicacion"></p>
+    
+    <!-- Formulario para generar el PDF -->
+    <form action="generar_pdf.php" method="post" target="_blank">
+        <input type="hidden" name="titulo" id="f_titulo_imagen" value="">
+        <input type="hidden" name="copyright" id="f_copyright" value="">
+        <input type="hidden" name="fecha" id="f_fecha" value="">
+        <input type="hidden" name="imagen" id="f_imagen" value="">
+        <input type="hidden" name="explicacion" id="f_explicacion" value="">
+        <button type="submit">Export to PDF</button>
+    </form>
+
+    <script>
+        // Función para obtener parámetros de la URL
+        function obtenerParametroUrl(nombre) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(nombre);
+        }
+
+        // Obtener datos de la URL
+        var titulo = obtenerParametroUrl('titulo') || '';
+        var copyright = obtenerParametroUrl('copyright') || 'Anonymous';
+        var fecha = obtenerParametroUrl('fecha') || '';
+        var urlImagen = obtenerParametroUrl('url_imagen') || '';
+        var explicacion = obtenerParametroUrl('explicacion') || '';
+
+        // Actualizar el contenido de la página con los datos obtenidos
+        document.getElementById('titulo_imagen').textContent = titulo;
+        document.getElementById('copyright').textContent = "Copyright: " + copyright;
+        document.getElementById('fecha').textContent = fecha;
+
+        if (urlImagen.includes("youtube")) {
+            // Mostrar el mensaje de enlace de YouTube y ocultar la imagen
+            document.getElementById('youtube_link').textContent = "Youtube link: " + urlImagen;
+            document.getElementById('youtube_link').style.display = 'block'; // Mostrar el mensaje de enlace
+            document.getElementById('imagen').style.display = 'none';
+        } else {
+            // Mostrar la imagen y ocultar el mensaje de enlace de YouTube
+            document.getElementById('imagen').src = urlImagen;
+        }
+        
+        document.getElementById('explicacion').textContent = explicacion;
+
+        // Establecer los valores para el pdf
+        document.getElementById('f_titulo_imagen').value = titulo;
+        document.getElementById('f_copyright').value = copyright;
+        document.getElementById('f_fecha').value = fecha;
+        document.getElementById('f_imagen').value = urlImagen;
+        document.getElementById('f_explicacion').value = explicacion;
+    </script>
+</body>
+</html>
